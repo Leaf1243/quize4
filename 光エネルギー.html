@@ -1,0 +1,75 @@
+<!DOCTYPE html>  
+<html lang="ja">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>血圧の測り方クイズ</title>  
+    <style>  
+        body { font-family: Arial, sans-serif; margin: 20px; }  
+        h1 { color: #2c3e50; }  
+        .quiz-container { margin-bottom: 20px; }  
+        .quiz { background: #f9f9f9; border: 1px solid #ddd; padding: 15px; border-radius: 5px; }  
+        button { margin-top: 10px; }  
+        .explanation { display: none; background-color: #e0ffe0; padding: 10px; border-left: 4px solid #28a745; }  
+    </style>  
+</head>  
+<body>  
+
+<h1>血圧の測り方クイズ</h1>  
+
+<div id="quizContainer"></div>  
+<button onclick="showResults()">結果を見る</button>  
+<div id="resultContainer" style="display:none;"></div>  
+
+<script>  
+    const quizzes = [  
+        { question: "1. ペニシリン系抗生物質はどのような作用をもちますか？", answers: ["細胞壁合成阻害", "細胞膜機能阻害", "タンパク質合成阻害","核酸合成阻害","葉酸合成阻害"], correct: 2, explanation: "細菌の細胞壁合成を阻害します。" },  
+        { question: "2. セフェム系抗生物質はどのような作用をもちますか？", answers: ["細胞壁合成阻害", "細胞膜機能阻害", "タンパク質合成阻害","核酸合成阻害","葉酸合成阻害"], correct: 1, explanation: "心臓と同じ位置に血圧計を置くことで正確な測定ができます。" },  
+        { question: "3. マクロライド系抗生物質はどのような作用をもちますか？", answers: ["細胞壁合成阻害", "細胞膜機能阻害", "タンパク質合成阻害","核酸合成阻害","葉酸合成阻害"], correct: 2, explanation: "細菌のタンパク質の合成を阻害します。" },  
+        { question: "4. テトラサイクリン系抗生物質はどのような作用をもちますか？", answers: ["細胞壁合成阻害", "細胞膜機能阻害", "タンパク質合成阻害","核酸合成阻害","葉酸合成阻害"], correct: 0, explanation: "細菌のタンパク質の合成を阻害します。" },  
+        { question: "5. ニューキノロン系抗生物質はどのような作用をもちますか？", answers: ["細胞壁合成阻害", "細胞膜機能阻害", "タンパク質合成阻害","核酸合成阻害","葉酸合成阻害"], correct: 0, explanation: "細菌のDNA合成を阻害します。" },  
+        { question: "6. セフェム系抗生物質はどのような作用をもちますか？", answers: ["細胞壁合成阻害", "細胞膜機能阻害", "タンパク質合成阻害","核酸合成阻害","葉酸合成阻害"], correct: 2, explanation: "血圧は、血液が血管を通過する際の圧力を測定します。" },  
+        { question: "7. 血圧の正常な範囲は？", answers: ["120/80 mmHg未満", "130/85 mmHg未満", "140/90 mmHg未満"], correct: 0, explanation: "血圧が120/80 mmHg未満であることが正常とされています。" },  
+        { question: "8. 血圧測定の頻度はどのくらいか？", answers: ["毎日", "週に一回", "月に一回"], correct: 1, explanation: "高血圧の人は毎日の測定が推奨されますが、一般の人は週に一回が理想的です。" },  
+        { question: "9. 血圧の上昇に関する要因は？", answers: ["ストレス", "運動", "睡眠"], correct: 0, explanation: "ストレスは血圧を上昇させる主要な要因の一つです。" },  
+        { question: "10. 血圧を下げるためには何が重要か？", answers: ["バランスの取れた食事", "運動", "両方"], correct: 2, explanation: "バランスの取れた食事と運動の両方が血圧を下げるのに重要です。" },  
+    ];  
+
+    function loadQuizzes() {  
+        const quizContainer = document.getElementById("quizContainer");  
+        quizzes.forEach((quiz, index) => {  
+            const quizDiv = document.createElement("div");  
+            quizDiv.className = "quiz";  
+            quizDiv.innerHTML = `  
+                <p>${quiz.question}</p>  
+                <form>  
+                    ${quiz.answers.map((answer, i) => `  
+                        <div>  
+                            <input type="radio" name="quiz${index}" value="${i}" id="quiz${index}answer${i}">  
+                            <label for="quiz${index}answer${i}">${answer}</label>  
+                        </div>  
+                    `).join('')}  
+                </form>  
+                <button onclick="showExplanation(${index})">解説を見る</button>  
+                <div class="explanation" id="explanation${index}">${quiz.explanation}</div>  
+            `;  
+            quizContainer.appendChild(quizDiv);  
+        });  
+    }  
+
+    function showExplanation(index) {  
+        const explanationDiv = document.getElementById(`explanation${index}`);  
+        explanationDiv.style.display = explanationDiv.style.display === "block" ? "none" : "block";  
+    }  
+
+    function showResults() {  
+        const resultContainer = document.getElementById("resultContainer");  
+        resultContainer.style.display = "block";  
+        resultContainer.innerHTML = "<h2>結果</h2><p>各自の回答をチェックしてください。</p>";  
+    }  
+
+    loadQuizzes();  
+</script>  
+
+</body>  
+</html>
